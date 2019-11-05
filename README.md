@@ -36,8 +36,7 @@ Other property:
 stateChangeMinGap: the minimum time gap for state change, probably triggered by uibutton, default 1s
 
 
-
-Example under a view controller
+Example under a view controller:
 ```
 let stateButton = ...
 
@@ -51,5 +50,5 @@ stateButton.states = [
             RSMapButton.ButtonState(action: { [weak self] in
                 //state 3 activated
                 }, image: UIImage(named: "img for state 3")),
-        ]
+            ]
 ```
