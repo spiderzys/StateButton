@@ -4,6 +4,8 @@ A subclass of UIButton to deal with state change
 
 the core property, states, is a list of:
 
+       
+```    
 struct ButtonState {
         let action: ()->Void
         let image: UIImage?
@@ -16,19 +18,23 @@ struct ButtonState {
             self.info = info
         }
     }
-
+```
 action: the block of what to do when the state is activated
+
 image: the image for the state
+
 tintColor: optional, the tint color for the image
+
 info: optional, the additional information for the state
 
 Other property:
+
 stateChangeMinGap: the minimum time gap for state change, probably triggered by uibutton, default 0.5
 
 
 
 Example under a view controller
-
+```
 let displayModeButton = ...
 
 displayModeButton.states = [
@@ -42,3 +48,4 @@ displayModeButton.states = [
                 //state 3 activated
                 }, image: UIImage(named: "img for state 3")),
         ]
+```
