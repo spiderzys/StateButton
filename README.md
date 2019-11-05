@@ -11,11 +11,13 @@ struct ButtonState {
         let image: UIImage?
         let tintColor:UIColor?
         let info:Any?
-        init(action: @escaping ()->Void,image: UIImage? ,tintColor:UIColor? = nil, info:Any? = nil) {
+        let title:String?
+        init(action: @escaping ()->Void, title:String? = nil, image: UIImage? ,tintColor:UIColor? = nil, info:Any? = nil) {
             self.action = action
             self.image = image
             self.tintColor = tintColor
             self.info = info
+            self.title = title
         }
     }
 ```
@@ -27,17 +29,19 @@ tintColor: optional, the tint color for the image
 
 info: optional, the additional information for the state
 
+title: optional, the button title for the state
+
 Other property:
 
-stateChangeMinGap: the minimum time gap for state change, probably triggered by uibutton, default 0.5
+stateChangeMinGap: the minimum time gap for state change, probably triggered by uibutton, default 1s
 
 
 
 Example under a view controller
 ```
-let displayModeButton = ...
+let stateButton = ...
 
-displayModeButton.states = [
+stateButton.states = [
             RSMapButton.ButtonState(action: { [weak self] in
                 //action state 1 activated
                 }, image: UIImage(named: "img for state 1")),
