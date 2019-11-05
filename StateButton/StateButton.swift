@@ -9,23 +9,26 @@
 
 import UIKit
 
-class State: UIButton {
+class StateButton: UIButton {
     
     struct ButtonState {
         let action: ()->Void
         let image: UIImage?
         let tintColor:UIColor?
         let info:Any?
-        init(action: @escaping ()->Void,image: UIImage? ,tintColor:UIColor? = nil, info:Any? = nil) {
+        let title:String?
+        init(action: @escaping ()->Void, title:String? = nil, image: UIImage? = nil ,tintColor:UIColor? = nil, info:Any? = nil) {
             self.action = action
             self.image = image
             self.tintColor = tintColor
             self.info = info
+            self.title = title
         }
     }
     
-    var stateChangeMinGap:Double = 0.5
-    var currentStateIndex:Int = 0
+    var stateChangeMinGap:Double = 1
+    
+    private var currentStateIndex:Int = 0
     
     @objc func nextState() {
         guard states.count > 0 else {return}
@@ -35,13 +38,15 @@ class State: UIButton {
         })
         currentStateIndex = (currentStateIndex + 1)%states.count
         activate(state: states[currentStateIndex])
+        
     }
     
     
-    func activate(state:ButtonState, actionPerformed:Bool = true) {
+    private func activate(state:ButtonState, actionPerformed:Bool = true) {
       
         setImage( state.image?.withRenderingMode(state.tintColor != nil ? .alwaysTemplate: .alwaysOriginal), for: .normal)
         self.tintColor = state.tintColor
+        self.setTitle(state.title, for: .normal)
         if actionPerformed {
             state.action()
         }
